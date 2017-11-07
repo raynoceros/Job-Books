@@ -1,10 +1,12 @@
 package com.jackong.jobbooks;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText pw_text;
     private Button showpw;
 
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_main);
 
         //Link variable to Edit Text id
-        email_text = (EditText) findViewById(R.id.txtbx_login_email);
-        pw_text = (EditText) findViewById(R.id.txtbx_login_pw);
+        email_text = (EditText) findViewById(R.id.text_box_login_email);
+        pw_text = (EditText) findViewById(R.id.text_box_login_pw);
 
         //Touch Interceptor function allow EditText to lose focus when touch anywhere else
-        FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
+        final FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -62,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
                             email_text.clearFocus();
                             pw_text.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            if (imm != null) {
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            }
                         }
                     }
                 }
@@ -70,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         //Change Text for Email Edit Text is focused
         //Check if user enter wrong email format
         //Check if user leave empty email field
         email_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (email_text.getText().toString().matches("E M A I L")) {
+                if (email_text.getText().toString().matches("Email Address")) {
                     email_text.setText("");
                 }
                 if (!hasFocus) {
@@ -116,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
         // On Touch Listener for Show Password Button
         showpw = (Button) findViewById(R.id.btn_show_pw);
         showpw.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
 
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         pw_text.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -136,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     //Button Open Forgot Password activity
     public void forgotPasswordOnClick(View v) {
         Intent myIntent = new Intent(MainActivity.this, ForgotPassword.class);
@@ -150,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.startActivity(myIntent);
 
     }
-
 
 
 //        mSendData = (Button) findViewById(R.id.addString);

@@ -19,7 +19,7 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/txtbx_login_email"
+        android:id="@+id/text_box_login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -32,23 +32,23 @@
         android:padding="15dp"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        android:text="E M A I L"
+        android:text="@string/default_text_login_email"
         android:textColor="@android:color/background_light"
         android:textColorHighlight="@android:color/background_light" />
 
     <EditText
-        android:id="@+id/txtbx_login_pw"
+        android:id="@+id/text_box_login_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtbx_login_email"
-        android:layout_below="@+id/txtbx_login_email"
-        android:layout_marginRight="40dp"
+        android:layout_alignStart="@+id/text_box_login_email"
+        android:layout_below="@+id/text_box_login_email"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPassword"
         android:padding="15dp"
         android:singleLine="true"
-        android:text="Password"
+        android:text="@string/default_text_login_password"
         android:textColor="@android:color/background_light" />
 
     <ImageView
@@ -56,9 +56,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/jobbooklogo300x300"
-        android:layout_above="@+id/txtbx_login_email"
+        android:layout_above="@+id/text_box_login_email"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="46dp" />
+        android:layout_marginBottom="46dp"
+        android:contentDescription="@string/app_logo_description"/>
 
 
     <Button
@@ -66,10 +67,10 @@
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtbx_login_pw"
-        android:layout_alignTop="@+id/txtbx_login_pw"
+        android:layout_alignStart="@+id/text_box_login_pw"
+        android:layout_alignTop="@+id/text_box_login_pw"
         android:layout_marginTop="35dp"
-        android:text="forgot password"
+        android:text="@string/forgot_password_button_text"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/background_light"
@@ -79,15 +80,15 @@
         android:id="@+id/btn_home_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtbx_login_pw"
-        android:layout_alignStart="@+id/txtbx_login_pw"
-        android:layout_below="@+id/txtbx_login_pw"
+        android:layout_alignEnd="@+id/text_box_login_pw"
+        android:layout_alignStart="@+id/text_box_login_pw"
+        android:layout_below="@+id/text_box_login_pw"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="46dp"
         android:background="@android:color/holo_red_light"
         android:padding="5dp"
-        android:text="SIGN IN"
+        android:text="@string/sign_in_button_text"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -98,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_home_login"
         android:layout_centerHorizontal="true"
-        android:text="New user? Register"
+        android:text="@string/register_button_text"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:onClick="RegisterOnClick"/>
@@ -106,12 +107,12 @@
     <Button
         android:id="@+id/btn_show_pw"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_alignBaseline="@+id/txtbx_login_pw"
-        android:layout_alignBottom="@+id/txtbx_login_pw"
-        android:layout_alignEnd="@+id/txtbx_login_pw"
-        android:layout_marginRight="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/text_box_login_pw"
+        android:layout_alignBottom="@+id/text_box_login_pw"
+        android:layout_alignEnd="@+id/text_box_login_pw"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/eye_holo_red"
         android:paddingBottom="20dp" />
 

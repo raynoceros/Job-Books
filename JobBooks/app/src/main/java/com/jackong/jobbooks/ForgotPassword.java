@@ -31,10 +31,10 @@ public class ForgotPassword extends AppCompatActivity {
         this.setContentView(R.layout.activity_forgot_password);
 
         //Get Info from previous activity
-        Intent intent = getIntent();
-        String email_info = intent.getStringExtra("key");
-        email = (TextView) findViewById(R.id.email_info);
-        email.setText(email_info);
+        //Intent intent = getIntent();
+        //String email_info = intent.getStringExtra("key");
+        //email = (TextView) findViewById(R.id.email_info);
+        //email.setText(email_info);
 
         //Add back button
         if(getSupportActionBar() != null){

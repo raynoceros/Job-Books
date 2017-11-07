@@ -8,92 +8,94 @@
     tools:context="com.jackong.jobbooks.RegisterNewUser"
     android:background="@mipmap/fancyblackxhdpi">
 
-    <EditText
-        android:id="@+id/txtbx_register_username"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="41dp"
-        android:allowUndo="false"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="15dp"
-        android:selectAllOnFocus="false"
-        android:maxLines="1"
-        android:text="Username"
-        android:textColor="@android:color/background_light"
-        android:textColorHighlight="@android:color/background_light" />
-    <EditText
-        android:id="@+id/txtbx_register_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        android:allowUndo="false"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:padding="15dp"
-        android:selectAllOnFocus="false"
-        android:maxLines="1"
-        android:text="Email Address"
-        android:textColor="@android:color/background_light"
-        android:textColorHighlight="@android:color/background_light"
-        android:layout_below="@+id/txtbx_register_username"
-        android:layout_alignStart="@+id/txtbx_register_username" />
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
 
-    <EditText
-        android:id="@+id/txtbx_register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="21dp"
-        android:allowUndo="false"
-        android:ems="10"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:selectAllOnFocus="false"
-        android:text="Password"
-        android:textColor="@android:color/background_light"
-        android:textColorHighlight="@android:color/background_light"
-        android:layout_alignStart="@+id/txtbx_register_email"
-        android:layout_below="@+id/txtbx_register_email"
-        />
-    <EditText
-        android:id="@+id/txtbx_register_confirmpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtbx_register_password"
-        android:layout_alignStart="@+id/txtbx_register_password"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        android:allowUndo="false"
-        android:ems="10"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:selectAllOnFocus="false"
-        android:text="Confirm Password"
-        android:textColor="@android:color/background_light"
-        android:textColorHighlight="@android:color/background_light" />
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtbx_register_confirmpassword"
-        android:layout_alignStart="@+id/txtbx_register_confirmpassword"
-        android:layout_below="@+id/txtbx_register_confirmpassword"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="46dp"
-        android:background="@android:color/holo_red_light"
-        android:padding="5dp"
-        android:text="REGISTER"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:onClick="RegisterNewUserOnClick"/>
+        <EditText
+            android:id="@+id/text_box_register_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:allowUndo="false"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:selectAllOnFocus="false"
+            android:text="@string/default_text_register_username"
+            android:textColor="@android:color/background_light"
+            android:textColorHighlight="@android:color/background_light" />
+
+        <EditText
+            android:id="@+id/text_box_register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:allowUndo="false"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:selectAllOnFocus="false"
+            android:text="@string/default_text_register_email"
+            android:textColor="@android:color/background_light"
+            android:textColorHighlight="@android:color/background_light" />
+
+        <EditText
+            android:id="@+id/text_box_register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:allowUndo="false"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:selectAllOnFocus="false"
+            android:text="@string/default_text_register_password"
+            android:textColor="@android:color/background_light"
+            android:textColorHighlight="@android:color/background_light" />
+
+        <EditText
+            android:id="@+id/text_box_register_confirmpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:allowUndo="false"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:selectAllOnFocus="false"
+            android:text="@string/default_text_register_confirm_password"
+            android:textColor="@android:color/background_light"
+            android:textColorHighlight="@android:color/background_light" />
+
+
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_red_light"
+            android:onClick="RegisterNewUserOnClick"
+            android:padding="5dp"
+            android:text="@string/register_now_button_text"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </RelativeLayout>
