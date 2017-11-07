@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "220371536890",
+    "firebase_url": "https://job-books-7f74b.firebaseio.com",
+    "project_id": "job-books-7f74b",
+    "storage_bucket": "job-books-7f74b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220371536890:android:913d12167af02d14",
+        "android_client_info": {
+          "package_name": "com.jackong.jobbooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220371536890-b46pv9rppch5huj8nqq2jv2pc9pcgfp5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jackong.jobbooks",
+            "certificate_hash": "054d34f1fd6177fea0b05438975156e296d14df5"
+          }
+        },
+        {
+          "client_id": "220371536890-srig3j1h835k4p78bn4o35df9itaggus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5FAsIxOkGc68-WHvVATEQhWJx01m3e28"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220371536890-srig3j1h835k4p78bn4o35df9itaggus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
