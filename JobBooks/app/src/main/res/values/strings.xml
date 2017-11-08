@@ -11,7 +11,7 @@
     <!--Forgot Password Activity-->
     <string name="warning_info_forgot_password">Your Email must be the same as the one you used to register.</string>
     <string name="default_text_reset_email">Email Address</string>
-    <string name="send_reset_email_button_text">SUBMIT EMAIL</string>
+    <string name="send_reset_email_button_text">RESET PASSWORD</string>
     <!--Register New User Activity-->
     <string name="default_text_register_username">Username</string>
     <string name="default_text_register_email">Email Address</string>

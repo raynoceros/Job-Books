@@ -15,7 +15,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="visible">
-
     </FrameLayout>
 
     <EditText
@@ -33,8 +32,8 @@
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:text="@string/default_text_login_email"
-        android:textColor="@android:color/background_light"
-        android:textColorHighlight="@android:color/background_light" />
+        android:textColor="#777c7c"
+        android:textStyle="italic" />
 
     <EditText
         android:id="@+id/text_box_login_pw"
@@ -45,11 +44,13 @@
         android:layout_marginEnd="40dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:padding="15dp"
+        android:password="false"
         android:singleLine="true"
         android:text="@string/default_text_login_password"
-        android:textColor="@android:color/background_light" />
+        android:textColor="#777c7c"
+        android:textStyle="italic" />
 
     <ImageView
         android:id="@+id/imageView"

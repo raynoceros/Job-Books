@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,15 +27,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Declare private variables
+    //Declare private variables
     //private Button mSendData;
     private EditText email_text;
     private EditText pw_text;
     private Button showpw;
 
 
-
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,32 +81,63 @@ public class MainActivity extends AppCompatActivity {
         //Check if user enter wrong email format
         //Check if user leave empty email field
         email_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            int email_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (email_text.getText().toString().matches("Email Address")) {
-                    email_text.setText("");
-                }
-                if (!hasFocus) {
-                    if (email_text.getText().toString().matches("")) {
-                        Toast.makeText(getApplication(), "Email field cannot be empty!",
-                                Toast.LENGTH_LONG).show();
-                    } else if (!email_text.getText().toString().contains("@")) {
-                        Toast.makeText(getApplication(), "Invalid email!",
-                                Toast.LENGTH_LONG).show();
+                if (email_counter < 1){
+                    //set email text color to white
+                    email_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set email text style to default
+                    email_text.setTypeface(Typeface.DEFAULT);
+                    email_text.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null){
+                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
+                if (email_counter > 0){
+                    //email text field validation
+                    if (!hasFocus) {
+                        if (email_text.getText().toString().matches("")) {
+                            Toast.makeText(getApplication(), "Email field cannot be empty!",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (!email_text.getText().toString().contains("@")) {
+                            Toast.makeText(getApplication(), "Invalid email!",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+                else{
+                    //force empty text
+                    if (email_text.getText().toString().matches("Email Address")) {
+                        email_text.setText("");
+                    }
+                }
+                email_counter++;
             }
         });
 
         //Empty Password Edit Text field when is focus for the first time
         //Check if user leave empty email field
         pw_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            int count = 0;
-
+            int password_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                if (password_counter < 1){
+                    //set password text color to white
+                    pw_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set password text style to default
+                    pw_text.setTypeface(Typeface.DEFAULT);
+                    //set password text inputType to PasswordInputType
+                    pw_text.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    pw_text.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null){
+                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    }
+                }
 
-                if (count > 0) {
+                if (password_counter > 0) {
                     if (!hasFocus) {
                         if (pw_text.getText().toString().matches("")) {
                             Toast.makeText(getApplication(), "Password field cannot be empty!",
@@ -116,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     pw_text.setText("");
-                    count++;
+                    password_counter++;
                 }
             }
         });

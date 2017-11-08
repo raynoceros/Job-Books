@@ -6,7 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jackong.jobbooks.RegisterNewUser"
+    android:focusableInTouchMode="true"
+    android:touchscreenBlocksFocus="false"
     android:background="@mipmap/fancyblackxhdpi">
+
+    <FrameLayout
+        android:id="@+id/touchInterceptor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,8 +36,9 @@
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_username"
-            android:textColor="@android:color/background_light"
-            android:textColorHighlight="@android:color/background_light" />
+            android:textColorHighlight="@android:color/background_light"
+            android:textColor="#777c7c"
+            android:textStyle="italic"/>
 
         <EditText
             android:id="@+id/text_box_register_email"
@@ -44,8 +54,9 @@
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_email"
-            android:textColor="@android:color/background_light"
-            android:textColorHighlight="@android:color/background_light" />
+            android:textColorHighlight="@android:color/background_light"
+            android:textColor="#777c7c"
+            android:textStyle="italic"/>
 
         <EditText
             android:id="@+id/text_box_register_password"
@@ -61,8 +72,9 @@
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_password"
-            android:textColor="@android:color/background_light"
-            android:textColorHighlight="@android:color/background_light" />
+            android:textColorHighlight="@android:color/background_light"
+            android:textColor="#777c7c"
+            android:textStyle="italic"/>
 
         <EditText
             android:id="@+id/text_box_register_confirmpassword"
@@ -78,8 +90,9 @@
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_confirm_password"
-            android:textColor="@android:color/background_light"
-            android:textColorHighlight="@android:color/background_light" />
+            android:textColorHighlight="@android:color/background_light"
+            android:textColor="#777c7c"
+            android:textStyle="italic"/>
 
 
 
