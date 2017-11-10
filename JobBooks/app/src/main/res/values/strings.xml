@@ -18,5 +18,38 @@
     <string name="default_text_register_password">Password</string>
     <string name="default_text_register_confirm_password">Confirm Password</string>
     <string name="register_now_button_text">REGISTER</string>
-
+    <!--First Time Activity-->
+    <string name="complete_profile_info">Before we begin, please let us know a little bit about you.</string>
+    <string name="default_text_first_name">First Name</string>
+    <string name="default_text_last_name">Last Name</string>
+    <string name="default_text_institute">Institute/University</string>
+    <string name="default_text_preferred_specialization">Preferred Specialization</string>
+    <string name="default_text_preferred_location">Preferred Work Location</string>
+    <string name="continue_button_text">CONTINUE</string>
+    <!--Home Activity-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="user_name">Jack Ong</string>
+    <string name="user_study_course">BACH DEGREE IN COMPUTER SCIENCE</string>
+    <!--Navigation Drawer-->
+    <string name="user_profile_text">MY PROFILE</string>
+    <string name="user_profile_preview">Preview Profile</string>
+    <string name="user_profile_education">Education</string>
+    <string name="user_profile_languages">Languages</string>
+    <string name="user_profile_additional_information">Additional Information</string>
+    <string name="user_profile_about_me">About Me</string>
+    <string name="user_profile_uploaded_resume">Uploaded Resume</string>
+    <string name="user_profile_experience">Experience</string>
+    <string name="user_profile_job_preference">Job Preference</string>
+    <string name="user_menu_feature">FEATURES</string>
+    <string name="user_online_application_text">Online Application</string>
+    <string name="user_interview_invitation_text">Interview Invitation</string>
+    <string name="user_chat_room_text">Chat Room</string>
+    <!--Setting-->
+    <string name="action_help_and_setting">HELP AND SETTINGS</string>
+    <string name="action_change_password">Change Password</string>
+    <string name="action_change_email">Change Email</string>
+    <string name="action_delete_account">Delete Account</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_help">Help</string>
 </resources>

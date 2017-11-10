@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,7 +16,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class RegisterNewUser extends AppCompatActivity {
 
@@ -24,6 +24,8 @@ public class RegisterNewUser extends AppCompatActivity {
     private EditText register_email_text;
     private EditText register_password_text;
     private EditText register_confirm_password_text;
+    private int password_counter = 0;
+    private int confirm_password_counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,30 +53,28 @@ public class RegisterNewUser extends AppCompatActivity {
         register_confirm_password_text = (EditText) findViewById(R.id.text_box_register_confirmpassword);
 
         //Touch Interceptor function allow EditText to lose focus when touch anywhere else
-        final FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
-        touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
+        FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
+        touchInterceptor.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (username_text.isFocused() || register_email_text.isFocused() || register_password_text.isFocused() || register_confirm_password_text.isFocused()) {
-                        Rect outRect = new Rect();
-                        username_text.getGlobalVisibleRect(outRect);
-                        register_email_text.getGlobalVisibleRect(outRect);
-                        register_password_text.getGlobalVisibleRect(outRect);
-                        register_confirm_password_text.getGlobalVisibleRect(outRect);
-                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            username_text.clearFocus();
-                            register_email_text.clearFocus();
-                            register_password_text.clearFocus();
-                            register_confirm_password_text.clearFocus();
-                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            if (imm != null) {
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                            }
+            public void onClick(View view) {
+                if (register_email_text.isFocused() || username_text.isFocused() || register_password_text.isFocused() || register_confirm_password_text.isFocused()){
+                    Rect outRect = new Rect();
+                    username_text.getGlobalVisibleRect(outRect);
+                    register_email_text.getGlobalVisibleRect(outRect);
+                    register_password_text.getGlobalVisibleRect(outRect);
+                    register_confirm_password_text.getGlobalVisibleRect(outRect);
+
+                    if (!outRect.contains((int) view.getX(), (int) view.getY())){
+                        username_text.clearFocus();
+                        register_email_text.clearFocus();
+                        register_password_text.clearFocus();
+                        register_confirm_password_text.clearFocus();
+                        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                     }
                 }
-                return false;
             }
         });
 
@@ -82,37 +82,33 @@ public class RegisterNewUser extends AppCompatActivity {
         //Empty Text for Username Edit Text
         //Check if user leave empty username field
         username_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-            int username_text_box_counter = 0;
 
             @Override
-            public void onFocusChange(View v, boolean hasFocus){
-                if (username_text_box_counter < 1){
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (username_text.getText().toString().matches("Username")) {
+                    //set empty field
+                    username_text.setText("");
                     //set username text color to white
                     username_text.setTextColor(Color.parseColor("#ffffff"));
                     //set username text style to default
                     username_text.setTypeface(Typeface.DEFAULT);
                     username_text.requestFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null){
+                    if (imm != null) {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (username_text_box_counter > 0){
-                    //check if empty
-                    if (!hasFocus) {
-                        if (username_text.getText().toString().matches("")) {
-                            Toast.makeText(getApplication(), "Username cannot be empty!",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                if (!hasFocus) {
+                    if (username_text.getText().toString().matches("")) {
+                        Snackbar.make(v, "Username field cannot be empty!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        //set email text color to #777c7c
+                        username_text.setTextColor(Color.parseColor("#777c7c"));
+                        //set email text style to italic
+                        username_text.setTypeface(null, Typeface.ITALIC);
+                        username_text.setText("Username");
                     }
                 }
-                else{
-                    //force empty text
-                    if (username_text.getText().toString().matches("Username")) {
-                        username_text.setText("");
-                    }
-                }
-                username_text_box_counter++;
             }
         });
 
@@ -121,10 +117,11 @@ public class RegisterNewUser extends AppCompatActivity {
         //Check if user enter wrong email format
         //Check if user leave empty email field
         register_email_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            int email_text_box_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (email_text_box_counter < 1){
+                if (register_email_text.getText().toString().matches("Email Address")){
+                    //empty field
+                    register_email_text.setText("");
                     //set email text color to white
                     register_email_text.setTextColor(Color.parseColor("#ffffff"));
                     //set email text style to default
@@ -135,35 +132,32 @@ public class RegisterNewUser extends AppCompatActivity {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (email_text_box_counter > 0){
-                    //email text field validation
-                    if (!hasFocus) {
-                        if (register_email_text.getText().toString().matches("")) {
-                            Toast.makeText(getApplication(), "Email field cannot be empty!",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (!register_email_text.getText().toString().contains("@")) {
-                            Toast.makeText(getApplication(), "Invalid email!",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                //email text field validation
+                if (!hasFocus) {
+                    if (register_email_text.getText().toString().matches("")) {
+                        Snackbar.make(v, "Email field cannot be empty!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        //set email text color to #777c7c
+                        register_email_text.setTextColor(Color.parseColor("#777c7c"));
+                        //set email text style to italic
+                        register_email_text.setTypeface(null, Typeface.ITALIC);
+                        register_email_text.setText("Email Address");
+                    } else if (!register_email_text.getText().toString().contains("@")) {
+                        Snackbar.make(v, "Invalid email format!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                     }
                 }
-                else{
-                    //force empty text
-                    if (register_email_text.getText().toString().matches("Email Address")) {
-                        register_email_text.setText("");
-                    }
-                }
-                email_text_box_counter++;
             }
         });
 
         //Empty Password Edit Text field when is focus for the first time
-        //Check if user leave empty password field
+        //Check if user leave empty field
         register_password_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            int password_text_box_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (password_text_box_counter < 1){
+                if ((password_counter < 1) || (register_password_text.getText().toString().matches("Password"))){
+                    //empty password field
+                    register_password_text.setText("");
                     //set password text color to white
                     register_password_text.setTextColor(Color.parseColor("#ffffff"));
                     //set password text style to default
@@ -177,29 +171,35 @@ public class RegisterNewUser extends AppCompatActivity {
                     }
                 }
 
-                if (password_text_box_counter > 0) {
-                    //check if empty
+                if (password_counter > 0) {
                     if (!hasFocus) {
                         if (register_password_text.getText().toString().matches("")) {
-                            Toast.makeText(getApplication(), "Password field cannot be empty!",
-                                    Toast.LENGTH_LONG).show();
+                            Snackbar.make(v, "Password field cannot be empty!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            //set password text color to #777c7c
+                            register_password_text.setTextColor(Color.parseColor("#777c7c"));
+                            //set password text style to italic
+                            register_password_text.setTypeface(null, Typeface.ITALIC);
+                            //set password text inputType to Text
+                            register_password_text.setInputType(InputType.TYPE_CLASS_TEXT);
+                            //set password text to Password
+                            register_password_text.setText("Password");
+                            password_counter = 0;
                         }
                     }
-                } else {
-                    //force empty field
-                    register_password_text.setText("");
                 }
-                password_text_box_counter++;
+                password_counter++;
             }
         });
 
         //Empty Confirm Password Edit Text field when is focus for the first time
-        //Check if user enter the same password
+        //Check if user leave empty field
         register_confirm_password_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            int confirm_password_text_box_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (confirm_password_text_box_counter < 1){
+                if ((confirm_password_counter < 1) || (register_confirm_password_text.getText().toString().matches("Confirm Password"))){
+                    //empty password field
+                    register_confirm_password_text.setText("");
                     //set password text color to white
                     register_confirm_password_text.setTextColor(Color.parseColor("#ffffff"));
                     //set password text style to default
@@ -213,26 +213,28 @@ public class RegisterNewUser extends AppCompatActivity {
                     }
                 }
 
-                if (confirm_password_text_box_counter > 0) {
-                    //check if password matches
-                    //check if field empty
+                if (confirm_password_counter > 0) {
                     if (!hasFocus) {
                         if (register_confirm_password_text.getText().toString().matches("")) {
-                            Toast.makeText(getApplication(), "Confirm Password field cannot be empty!",
-                                    Toast.LENGTH_LONG).show();
+                            Snackbar.make(v, "Confirm Password field cannot be empty!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            //set password text color to #777c7c
+                            register_confirm_password_text.setTextColor(Color.parseColor("#777c7c"));
+                            //set password text style to italic
+                            register_confirm_password_text.setTypeface(null, Typeface.ITALIC);
+                            //set password text inputType to Text
+                            register_confirm_password_text.setInputType(InputType.TYPE_CLASS_TEXT);
+                            //set password text to Password
+                            register_confirm_password_text.setText("Confirm Password");
+                            confirm_password_counter = 0;
                         }
-                        else {
-                            if (!register_confirm_password_text.getText().toString().matches(register_password_text.getText().toString())){
-                                Toast.makeText(getApplication(), "Password not match!",
-                                        Toast.LENGTH_LONG).show();
-                            }
+                        else if (!register_confirm_password_text.getText().toString().matches(register_password_text.getText().toString())){
+                            Snackbar.make(v, "Password not match!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                         }
                     }
-                } else {
-                    //force empty field
-                    register_confirm_password_text.setText("");
                 }
-                confirm_password_text_box_counter++;
+                confirm_password_counter++;
             }
         });
     }
@@ -253,6 +255,10 @@ public class RegisterNewUser extends AppCompatActivity {
         //Intent myIntent = new Intent(MainActivity.this, ForgotPassword.class);
         //myIntent.putExtra("key", email_text.getText().toString());
         //MainActivity.this.startActivity(myIntent);
-
+    }
+    //Disable Device Back Button
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

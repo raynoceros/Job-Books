@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/user_menu_feature">
+            <menu>
+                <item
+                    android:id="@+id/nav_user_online_application"
+                    android:icon="@drawable/ic_online_application"
+                    android:title="@string/user_online_application_text" />
+                <item
+                    android:id="@+id/nav_user_interview_invitation"
+                    android:icon="@drawable/ic_interview_invitation"
+                    android:title="@string/user_interview_invitation_text" />
+                <item
+                    android:id="@+id/nav_user_chat_room"
+                    android:icon="@drawable/ic_chat_room"
+                    android:title="@string/user_chat_room_text" />
+            </menu>
+        </item>
+    </group>
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_user_profile"
+            android:title="@string/user_profile_text">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile_preview"
+                    android:title="@string/user_profile_preview"
+                    android:icon="@drawable/ic_preview_profile"/>
+                <item
+                    android:id="@+id/nav_profile_education"
+                    android:title="@string/user_profile_education"
+                    android:icon="@drawable/ic_education"/>
+                <item
+                    android:id="@+id/nav_profile_languages"
+                    android:title="@string/user_profile_languages"
+                    android:icon="@drawable/ic_language"/>
+                <item
+                    android:id="@+id/nav_profile_additional_information"
+                    android:title="@string/user_profile_additional_information"
+                    android:icon="@drawable/ic_additional_info"/>
+                <item
+                    android:id="@+id/nav_profile_about_me"
+                    android:title="@string/user_profile_about_me"
+                    android:icon="@drawable/ic_about_me"/>
+                <item
+                    android:id="@+id/nav_profile_uploaded_resume"
+                    android:title="@string/user_profile_uploaded_resume"
+                    android:icon="@drawable/ic_uploaded_resume"/>
+                <item
+                    android:id="@+id/nav_profile_experience"
+                    android:title="@string/user_profile_experience"
+                    android:icon="@drawable/ic_experience"/>
+                <item
+                    android:id="@+id/nav_profile_job_preference"
+                    android:title="@string/user_profile_job_preference"
+                    android:icon="@drawable/ic_job_preference"/>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/action_help_and_setting">
+            <menu>
+                <item
+                    android:id="@+id/nav_change_password"
+                    android:title="@string/action_change_password"
+                    android:icon="@drawable/ic_change_password"/>
+                <item
+                    android:id="@+id/nav_change_email"
+                    android:title="@string/action_change_email"
+                    android:icon="@drawable/ic_change_email"/>
+                <item
+                    android:id="@+id/nav_delete_account"
+                    android:title="@string/action_delete_account"
+                    android:icon="@drawable/ic_delete_account"/>
+                <item
+                    android:id="@+id/action_help"
+                    android:title="@string/action_help"
+                    android:icon="@drawable/ic_help"/>
+                <item
+                    android:id="@+id/action_logout"
+                    android:title="@string/action_logout"
+                    android:icon="@drawable/ic_logout"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>

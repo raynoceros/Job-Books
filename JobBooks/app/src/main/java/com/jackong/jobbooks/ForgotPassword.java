@@ -1,10 +1,10 @@
 package com.jackong.jobbooks;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,8 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -52,24 +50,21 @@ public class ForgotPassword extends AppCompatActivity {
         }
 
         //Touch Interceptor function allow EditText to lose focus when touch anywhere else
-        final FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
-        touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
+        FrameLayout touchInterceptor = (FrameLayout) findViewById(R.id.touchInterceptor);
+        touchInterceptor.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (forgot_email_text.isFocused()) {
-                        Rect outRect = new Rect();
-                        forgot_email_text.getGlobalVisibleRect(outRect);
-                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            forgot_email_text.clearFocus();
-                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            if (imm != null) {
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                            }
+            public void onClick(View view) {
+                if (forgot_email_text.isFocused()){
+                    Rect outRect = new Rect();
+                    forgot_email_text.getGlobalVisibleRect(outRect);
+                    if (!outRect.contains((int) view.getX(), (int) view.getY())){
+                        forgot_email_text.clearFocus();
+                        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                     }
                 }
-                return false;
             }
         });
 
@@ -81,39 +76,35 @@ public class ForgotPassword extends AppCompatActivity {
         //Check if user enter wrong email format
         //Check if user leave empty email field
         forgot_email_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            int forgot_email_counter = 0;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (forgot_email_counter < 1){
+                if (forgot_email_text.getText().toString().matches("Email Address")) {
+                    //set empty field
+                    forgot_email_text.setText("");
                     //set email text color to white
                     forgot_email_text.setTextColor(Color.parseColor("#ffffff"));
                     //set email text style to default
                     forgot_email_text.setTypeface(Typeface.DEFAULT);
                     forgot_email_text.requestFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null){
+                    if (imm != null) {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (forgot_email_counter > 0){
-                    //email text field validation
-                    if (!hasFocus) {
-                        if (forgot_email_text.getText().toString().matches("")) {
-                            Toast.makeText(getApplication(), "Email field cannot be empty!",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (!forgot_email_text.getText().toString().contains("@")) {
-                            Toast.makeText(getApplication(), "Invalid email!",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                if (!hasFocus) {
+                    if (forgot_email_text.getText().toString().matches("")) {
+                        Snackbar.make(v, "Email field cannot be empty!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        //set email text color to #777c7c
+                        forgot_email_text.setTextColor(Color.parseColor("#777c7c"));
+                        //set email text style to italic
+                        forgot_email_text.setTypeface(null, Typeface.ITALIC);
+                        forgot_email_text.setText("Email Address");
+                    } else if (!forgot_email_text.getText().toString().contains("@")) {
+                        Snackbar.make(v, "Invalid email format!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                     }
                 }
-                else{
-                    //force empty text
-                    if (forgot_email_text.getText().toString().matches("Email Address")) {
-                        forgot_email_text.setText("");
-                    }
-                }
-                forgot_email_counter++;
             }
         });
 
@@ -133,6 +124,6 @@ public class ForgotPassword extends AppCompatActivity {
     //Disable Device Back Button
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
     }
 }
