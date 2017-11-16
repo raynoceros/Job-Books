@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jackong.jobbooks.Profile"
+    android:background="#cfcfcf">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/outer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000">
+
+
+            <RelativeLayout
+                android:id="@+id/profile_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_white_curve">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/profiledummy"
+                    android:contentDescription="@string/profile_picture" />
+
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/profile_picture"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/profile_name"
+                    android:layout_below="@+id/profile_name"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/profile_date_created"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/profile_email"
+                    android:layout_below="@+id/profile_email"
+                    android:layout_marginTop="5dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profile_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_container"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_white_curve">
+
+                <TextView
+                    android:id="@+id/profile_education_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/layout_red_curve_upper"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/profile_education_title"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/education_edit_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/ic_edit"
+                    android:backgroundTint="#ffffff" />
+
+                <TextView
+                    android:id="@+id/education_institute_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_education_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/education_institute_info" />
+
+                <TextView
+                    android:id="@+id/education_study_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/institute_name"
+                    android:layout_below="@+id/institute_name"
+                    android:text="@string/education_course_info"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/institute_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="institute"
+                    android:textColor="#000000"
+                    android:layout_below="@id/education_institute_info"
+                    android:layout_alignStart="@id/education_institute_info"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/education_qualification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="qualification"
+                    android:textColor="#000000"
+                    android:layout_below="@id/education_study_info"
+                    android:layout_alignStart="@id/education_study_info"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/education_field_of_study"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/education_qualification"
+                    android:layout_alignBaseline="@id/education_qualification"
+                    android:layout_marginStart="10dp"
+                    android:text="course"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profile_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_education"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_white_curve">
+
+                <TextView
+                    android:id="@+id/profile_language_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/layout_red_curve_upper"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/profile_language_title"
+                    android:textColor="#ffffff" />
+
+                <ListView
+                    android:id="@+id/language_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/profile_language_title" />
+
+                <Button
+                    android:id="@+id/language_edit_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/ic_edit"
+                    android:backgroundTint="#ffffff" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profile_additional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_language"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_white_curve">
+
+                <TextView
+                    android:id="@+id/profile_additional_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/layout_red_curve_upper"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/profile_additional_title"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/additional_info_edit_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/ic_edit"
+                    android:backgroundTint="#ffffff" />
+
+                <TextView
+                    android:id="@+id/additional_info_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_additional_title"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/additional_info_salary" />
+
+                <TextView
+                    android:id="@+id/profile_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/additional_info_salary"
+                    android:layout_alignBottom="@+id/additional_info_salary"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/profile_preferred_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/profile_salary"
+                    android:layout_below="@id/profile_salary"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/additional_info_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/profile_preferred_location"
+                    android:layout_alignStart="@id/additional_info_salary"
+                    android:text="@string/additional_info_location" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profile_about_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_additional"
+                android:layout_marginBottom="66dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_white_curve">
+
+                <TextView
+                    android:id="@+id/profile_about_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/layout_red_curve_upper"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/profile_about_title"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/about_edit_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/ic_edit"
+                    android:backgroundTint="#ffffff" />
+
+                <TextView
+                    android:id="@+id/about_me_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_about_title"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/about_me_address" />
+
+                <TextView
+                    android:id="@+id/profile_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/about_me_address"
+                    android:layout_alignBottom="@id/about_me_address"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/profile_nationality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/profile_address"
+                    android:layout_below="@id/profile_address"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/about_me_nationality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/profile_nationality"
+                    android:layout_alignStart="@id/about_me_address"
+                    android:text="@string/about_me_nationality" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation"
+        android:paddingTop="15dp"
+        android:layout_marginTop="5dp"
+        app:itemIconTint="@drawable/colour_selector" />
+
+</android.support.constraint.ConstraintLayout>
+

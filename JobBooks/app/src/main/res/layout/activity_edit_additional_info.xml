@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cfcfcf"
+    android:focusableInTouchMode="true"
+    android:touchscreenBlocksFocus="false"
+    tools:context="com.jackong.jobbooks.EditAdditionalInfo">
+
+    <FrameLayout
+        android:id="@+id/touchInterceptor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/text_box_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/curve_white"
+            android:hint="@string/additional_info_salary"
+            android:maxLines="3"
+            android:inputType="number"
+            android:minWidth="300dp"
+            android:padding="15dp"
+            android:textSize="14sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/text_box_work_location"
+            android:layout_width="wrap_content"
+            android:minWidth="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/curve_white"
+            android:inputType="text"
+            android:padding="15dp"
+            android:hint="@string/location_hint"
+            android:textSize="14sp"
+            />
+
+
+        <Button
+            android:id="@+id/btn_save_education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/curve_red_d50000"
+            android:onClick="EditAddOnClick"
+            android:padding="5dp"
+            android:text="@string/continue_button_text"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

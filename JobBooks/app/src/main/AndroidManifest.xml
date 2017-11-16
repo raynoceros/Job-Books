@@ -2,12 +2,60 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jackong.jobbooks">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/job_books_icon_512"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".Login"
+            android:label="Job Books"
+            android:theme="@style/AppTheme_no_title" />
+        <activity
+            android:name=".ForgotPassword"
+            android:label="Forgot Password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".RegisterNewUser"
+            android:label="Register"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FirstTime"
+            android:label="Profile"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Home"/>
+        <activity
+            android:name=".Search"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Notification"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Chat"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditEducation"
+            android:label="Education"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditLanguage"
+            android:label="Language"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditAdditionalInfo"
+            android:label="Additional Info"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditAboutMe"
+            android:label="About Me"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".MainActivity"
             android:label="Job Books"
@@ -18,22 +66,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ForgotPassword"
-            android:label="Forgot Password"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".RegisterNewUser"
-            android:label="Register"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".FirstTime"
-            android:label="Profile"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".Home"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

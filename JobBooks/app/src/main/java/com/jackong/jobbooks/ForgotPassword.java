@@ -4,44 +4,42 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class ForgotPassword extends AppCompatActivity {
 
     //Declare private variables
     private EditText forgot_email_text;
+    private Button reset_pw;
+    private ProgressBar reset_progress;
 
 
     //OnCreate Method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        //Make status bar transparent
-        //Set background image
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        RelativeLayout layout = new RelativeLayout(this);
-        layout.setBackgroundResource(R.mipmap.fancyblackxhdpi);
         this.setContentView(R.layout.activity_forgot_password);
-
-        //Get Info from previous activity
-        //Intent intent = getIntent();
-        //String email_info = intent.getStringExtra("key");
-        //email = (TextView) findViewById(R.id.email_info);
-        //email.setText(email_info);
 
         //Add back button
         if(getSupportActionBar() != null){
@@ -81,8 +79,8 @@ public class ForgotPassword extends AppCompatActivity {
                 if (forgot_email_text.getText().toString().matches("Email Address")) {
                     //set empty field
                     forgot_email_text.setText("");
-                    //set email text color to white
-                    forgot_email_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set text color to black
+                    forgot_email_text.setTextColor(Color.parseColor("#000000"));
                     //set email text style to default
                     forgot_email_text.setTypeface(Typeface.DEFAULT);
                     forgot_email_text.requestFocus();
@@ -95,14 +93,11 @@ public class ForgotPassword extends AppCompatActivity {
                     if (forgot_email_text.getText().toString().matches("")) {
                         Snackbar.make(v, "Email field cannot be empty!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-                        //set email text color to #777c7c
-                        forgot_email_text.setTextColor(Color.parseColor("#777c7c"));
                         //set email text style to italic
                         forgot_email_text.setTypeface(null, Typeface.ITALIC);
+                        //set text color to 777c7c
+                        forgot_email_text.setTextColor(Color.parseColor("#777c7c"));
                         forgot_email_text.setText("Email Address");
-                    } else if (!forgot_email_text.getText().toString().contains("@")) {
-                        Snackbar.make(v, "Invalid email format!", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
                     }
                 }
             }
@@ -119,6 +114,45 @@ public class ForgotPassword extends AppCompatActivity {
             this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //Reset Password
+    public void ResetPasswordOnClick(View v){
+        reset_pw = (Button)findViewById(R.id.btn_send_reset_email);
+        reset_progress = (ProgressBar)findViewById(R.id.reset_progress);
+        reset_progress.setVisibility(View.VISIBLE);
+        reset_pw.setVisibility(View.INVISIBLE);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailAddress = forgot_email_text.getText().toString();
+        auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ForgotPassword.this, "Email sent.",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            String error_message;
+                            if (task.getException() != null){
+                                try {
+                                    throw task.getException();
+                                } catch(FirebaseNetworkException e) {
+                                    error_message = "Network disconnected...Unable to connect.";
+                                } catch(Exception e) {
+                                    error_message = "Reset email send fail. Please try again later";
+                                }
+                                Toast.makeText(ForgotPassword.this, error_message, Toast.LENGTH_LONG).show();
+                                reset_progress.setVisibility(View.INVISIBLE);
+                                reset_pw.setVisibility(View.VISIBLE);
+                            }
+
+                        }
+                    }
+                });
+
     }
 
     //Disable Device Back Button

@@ -5,40 +5,41 @@
     android:id="@+id/RegisterNewUser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jackong.jobbooks.RegisterNewUser"
+    android:background="#cfcfcf"
     android:focusableInTouchMode="true"
     android:touchscreenBlocksFocus="false"
-    android:background="@mipmap/fancyblackxhdpi">
+    tools:context="com.jackong.jobbooks.RegisterNewUser">
 
     <FrameLayout
         android:id="@+id/touchInterceptor"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="visible">
+
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/text_box_register_username"
+            android:id="@+id/text_box_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:allowUndo="false"
+            android:background="@drawable/curve_white"
             android:ems="10"
             android:inputType="text"
             android:maxLines="1"
             android:padding="15dp"
             android:selectAllOnFocus="false"
-            android:text="@string/default_text_register_username"
-            android:textColorHighlight="@android:color/background_light"
+            android:text="@string/default_text_register_name"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <EditText
             android:id="@+id/text_box_register_email"
@@ -48,15 +49,15 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
             android:allowUndo="false"
+            android:background="@drawable/curve_white"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_email"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <EditText
             android:id="@+id/text_box_register_password"
@@ -66,15 +67,15 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
             android:allowUndo="false"
+            android:background="@drawable/curve_white"
             android:ems="10"
             android:inputType="text"
             android:maxLines="1"
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_password"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <EditText
             android:id="@+id/text_box_register_confirmpassword"
@@ -84,15 +85,15 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
             android:allowUndo="false"
+            android:background="@drawable/curve_white"
             android:ems="10"
             android:inputType="text"
             android:maxLines="1"
             android:padding="15dp"
             android:selectAllOnFocus="false"
             android:text="@string/default_text_register_confirm_password"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/btn_register"
@@ -100,13 +101,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="65dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/holo_red_light"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/curve_red_d50000"
             android:onClick="RegisterNewUserOnClick"
             android:padding="5dp"
             android:text="@string/register_now_button_text"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/register_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </RelativeLayout>

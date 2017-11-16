@@ -1,55 +1,64 @@
 <resources>
     <string name="app_name">Job Books</string>
-    <string name="title_activity_home">Home</string>
+    <string name="logout_button">Logout</string>
     <!--Main Activity-->
     <string name="default_text_login_email">Email Address</string>
     <string name="default_text_login_password">Password</string>
     <string name="forgot_password_button_text">forgot password</string>
     <string name="sign_in_button_text">SIGN IN</string>
-    <string name="register_button_text">New user? Register</string>
+    <string name="register_button_text">Register</string>
     <string name="app_logo_description">Job Books</string>
     <!--Forgot Password Activity-->
     <string name="warning_info_forgot_password">Your Email must be the same as the one you used to register.</string>
     <string name="default_text_reset_email">Email Address</string>
     <string name="send_reset_email_button_text">RESET PASSWORD</string>
     <!--Register New User Activity-->
-    <string name="default_text_register_username">Username</string>
+    <string name="default_text_register_name">Name</string>
     <string name="default_text_register_email">Email Address</string>
     <string name="default_text_register_password">Password</string>
     <string name="default_text_register_confirm_password">Confirm Password</string>
     <string name="register_now_button_text">REGISTER</string>
     <!--First Time Activity-->
     <string name="complete_profile_info">Before we begin, please let us know a little bit about you.</string>
-    <string name="default_text_first_name">First Name</string>
-    <string name="default_text_last_name">Last Name</string>
     <string name="default_text_institute">Institute/University</string>
+    <string name="institute_hint">Example: INTI International College Penang</string>
     <string name="default_text_preferred_specialization">Preferred Specialization</string>
-    <string name="default_text_preferred_location">Preferred Work Location</string>
+    <string name="specialization_hint">Example: IT - Software</string>
+    <string name="default_text_preferred_location">Preferred Work Location (Malaysia)</string>
+    <string name="location_hint">Example: Sawarak</string>
     <string name="continue_button_text">CONTINUE</string>
     <!--Home Activity-->
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="user_name">Jack Ong</string>
-    <string name="user_study_course">BACH DEGREE IN COMPUTER SCIENCE</string>
-    <!--Navigation Drawer-->
-    <string name="user_profile_text">MY PROFILE</string>
-    <string name="user_profile_preview">Preview Profile</string>
-    <string name="user_profile_education">Education</string>
-    <string name="user_profile_languages">Languages</string>
-    <string name="user_profile_additional_information">Additional Information</string>
-    <string name="user_profile_about_me">About Me</string>
-    <string name="user_profile_uploaded_resume">Uploaded Resume</string>
-    <string name="user_profile_experience">Experience</string>
-    <string name="user_profile_job_preference">Job Preference</string>
-    <string name="user_menu_feature">FEATURES</string>
-    <string name="user_online_application_text">Online Application</string>
-    <string name="user_interview_invitation_text">Interview Invitation</string>
-    <string name="user_chat_room_text">Chat Room</string>
-    <!--Setting-->
-    <string name="action_help_and_setting">HELP AND SETTINGS</string>
-    <string name="action_change_password">Change Password</string>
-    <string name="action_change_email">Change Email</string>
-    <string name="action_delete_account">Delete Account</string>
-    <string name="action_logout">Logout</string>
-    <string name="action_help">Help</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_chat_room">Chat</string>
+    <string name="title_profile">Profile</string>
+    <!--Profile Activity-->
+    <string name="profile_picture">profile picture of user</string>
+    <string name="profile_language_title">Language</string>
+
+    <!--Profile Education-->
+    <string name="profile_education_title">Education(Current)</string>
+    <string name="education_institute_info">Current Institute/University:</string>
+    <string name="education_course_info">Current Course:</string>
+    <string name="edit_edu_institute_hint">Institute/University</string>
+    <string name="edit_edu_qualification_hint">Current Qualification</string>
+    <string name="edit_edu_field_of_study_hint">Field of Study</string>
+
+    <string name="edit_language_info">Tap on the langauge you wish to edit/delete.</string>
+    <string name="edit_langugage_add_button">ADD NEW</string>
+
+
+    <!--Profile Additional Info-->
+    <string name="profile_additional_title">Additional Info</string>
+    <string name="additional_info_location">Preferred Work Location</string>
+    <string name="additional_info_salary">Expected Salary (MYR)</string>
+
+    <!--Profile About Me -->
+    <string name="profile_about_title">About Me</string>
+    <string name="about_me_address">Address</string>
+    <string name="about_me_nationality">Nationality</string>
+    <string name="edit_address_hint">Address</string>
+    <string name="edit_nationality_hint">Nationality</string>
+
 </resources>

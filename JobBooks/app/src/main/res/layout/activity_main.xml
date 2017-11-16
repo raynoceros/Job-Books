@@ -2,121 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeRL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="com.jackong.jobbooks.MainActivity"
     android:background="@mipmap/fancyblackxhdpi"
-    android:focusableInTouchMode="true"
-    android:touchscreenBlocksFocus="false"
-    tools:context="com.jackong.jobbooks.MainActivity">
-
-    <FrameLayout
-        android:id="@+id/touchInterceptor"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="visible">
-    </FrameLayout>
-
-    <EditText
-        android:id="@+id/text_box_login_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:allowUndo="false"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:padding="15dp"
-        android:selectAllOnFocus="false"
-        android:singleLine="true"
-        android:text="@string/default_text_login_email"
-        android:textColor="#777c7c"
-        android:textStyle="italic" />
-
-    <EditText
-        android:id="@+id/text_box_login_pw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/text_box_login_email"
-        android:layout_below="@+id/text_box_login_email"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="15dp"
-        android:password="false"
-        android:singleLine="true"
-        android:text="@string/default_text_login_password"
-        android:textColor="#777c7c"
-        android:textStyle="italic" />
+    >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/app_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/jobbooklogo300x300"
         android:layout_above="@+id/text_box_login_email"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
-        android:contentDescription="@string/app_logo_description"/>
-
-
-    <Button
-        android:id="@+id/btn_forgot_pw"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/text_box_login_pw"
-        android:layout_alignTop="@+id/text_box_login_pw"
-        android:layout_marginTop="35dp"
-        android:text="@string/forgot_password_button_text"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="@android:color/background_light"
-        android:onClick="forgotPasswordOnClick"/>
-
-    <Button
-        android:id="@+id/btn_home_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/text_box_login_pw"
-        android:layout_alignStart="@+id/text_box_login_pw"
-        android:layout_below="@+id/text_box_login_pw"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="46dp"
-        android:background="@android:color/holo_red_light"
-        android:padding="5dp"
-        android:text="@string/sign_in_button_text"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:onClick="LoginOnClick"/>
-
-    <Button
-        android:id="@+id/btn_register"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_home_login"
-        android:layout_centerHorizontal="true"
-        android:text="@string/register_button_text"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:onClick="RegisterOnClick"/>
-
-    <Button
-        android:id="@+id/btn_show_pw"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignBaseline="@+id/text_box_login_pw"
-        android:layout_alignBottom="@+id/text_box_login_pw"
-        android:layout_alignEnd="@+id/text_box_login_pw"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/eye_holo_red"
-        android:paddingBottom="20dp"
-        android:visibility="gone" />
-
+        android:contentDescription="@string/app_logo_description"
+        app:srcCompat="@mipmap/jobbooklogo300x300"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

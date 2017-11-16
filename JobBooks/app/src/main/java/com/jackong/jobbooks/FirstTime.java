@@ -8,42 +8,108 @@ import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FirstTime extends AppCompatActivity {
 
     //Declare private variables
-    private EditText first_name_text;
-    private EditText last_name_text;
-    private EditText institute_text;
-    private EditText specialization_text;
-    private EditText location_text;
-
+    private AutoCompleteTextView institute_text;
+    private AutoCompleteTextView specialization_text;
+    private AutoCompleteTextView location_text;
+    private Button proceed_button;
+    private ProgressBar proceed_progress;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private Boolean complete_check_institute;
+    private Boolean complete_check_specialization;
+    private Boolean complete_check_location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Make status bar transparent
-        //Set background image
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        RelativeLayout layout = new RelativeLayout(this);
-        layout.setBackgroundResource(R.mipmap.fancyblackxhdpi);
         this.setContentView(R.layout.activity_first_time);
 
-        //Link variables to EditText id
-        first_name_text = (EditText) findViewById(R.id.text_box_first_name);
-        last_name_text = (EditText) findViewById(R.id.text_box_last_name);
-        institute_text = (EditText) findViewById(R.id.text_box_institute);
-        specialization_text = (EditText) findViewById(R.id.text_box_preferred_specializations);
-        location_text = (EditText) findViewById(R.id.text_box_preferred_locations);
+        //Link variables to EditText id\
+        specialization_text = (AutoCompleteTextView) findViewById(R.id.text_box_preferred_specializations);
+        location_text = (AutoCompleteTextView) findViewById(R.id.text_box_work_location);
+        institute_text = (AutoCompleteTextView) findViewById(R.id.text_box_institute);
+        proceed_button = (Button)findViewById(R.id.btn_proceed_profile_setup);
+        proceed_progress = (ProgressBar)findViewById(R.id.first_time_progress);
+
+        //set Auth
+        mAuth = FirebaseAuth.getInstance();
+        //set database
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        //set array adapter for institute
+        final ArrayAdapter<String> institute_array = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        mDatabase.child("Application").child("Institute University").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    String institute_value = data.getValue(String.class);
+                    institute_array.add(institute_value);
+                }
+                //set array adapter to auto completion text view
+                institute_text.setAdapter(institute_array);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //set array adapter for specialization
+        final ArrayAdapter<String> specialization_array = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        mDatabase.child("Application").child("Specializations").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    String specialization_value = data.getValue(String.class);
+                    specialization_array.add(specialization_value);
+                }
+                //set array adapter to auto completion text view
+                specialization_text.setAdapter(specialization_array);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //set array adapter for work location
+        final ArrayAdapter<String> location_array = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        mDatabase.child("Application").child("Malaysia Location").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    String location_value = data.getValue(String.class);
+                    location_array.add(location_value);
+                }
+                //set array adapter to auto completion text view
+                location_text.setAdapter(location_array);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         //Touch Interceptor function allow EditText to lose focus when touch anywhere else
@@ -51,17 +117,13 @@ public class FirstTime extends AppCompatActivity {
         touchInterceptor.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (first_name_text.isFocused() || last_name_text.isFocused() || institute_text.isFocused() || specialization_text.isFocused() || location_text.isFocused()){
+                if (institute_text.isFocused() || specialization_text.isFocused() || location_text.isFocused()){
                     Rect outRect = new Rect();
-                    first_name_text.getGlobalVisibleRect(outRect);
-                    last_name_text.getGlobalVisibleRect(outRect);
                     institute_text.getGlobalVisibleRect(outRect);
                     specialization_text.getGlobalVisibleRect(outRect);
                     location_text.getGlobalVisibleRect(outRect);
 
                     if (!outRect.contains((int) view.getX(), (int) view.getY())){
-                        first_name_text.clearFocus();
-                        last_name_text.clearFocus();
                         institute_text.clearFocus();
                         specialization_text.clearFocus();
                         location_text.clearFocus();
@@ -74,83 +136,16 @@ public class FirstTime extends AppCompatActivity {
             }
         });
 
-        //Empty Text for first name Edit Text
-        //Check if user leave empty first name field
-        first_name_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (first_name_text.getText().toString().matches("First Name")) {
-                    //set empty field
-                    first_name_text.setText("");
-                    //set first name text color to white
-                    first_name_text.setTextColor(Color.parseColor("#ffffff"));
-                    //set first name text style to default
-                    first_name_text.setTypeface(Typeface.DEFAULT);
-                    first_name_text.requestFocus();
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null) {
-                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    }
-                }
-                if (!hasFocus) {
-                    if (first_name_text.getText().toString().matches("")) {
-                        Snackbar.make(v, "First Name field cannot be empty!", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        //set text color to #777c7c
-                        first_name_text.setTextColor(Color.parseColor("#777c7c"));
-                        //set text style to italic
-                        first_name_text.setTypeface(null, Typeface.ITALIC);
-                        first_name_text.setText("First Name");
-                    }
-                }
-            }
-        });
-
-        //Empty Text for first name Edit Text
-        //Check if user leave empty first name field
-        last_name_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (last_name_text.getText().toString().matches("Last Name")) {
-                    //set empty field
-                    last_name_text.setText("");
-                    //set first name text color to white
-                    last_name_text.setTextColor(Color.parseColor("#ffffff"));
-                    //set first name text style to default
-                    last_name_text.setTypeface(Typeface.DEFAULT);
-                    last_name_text.requestFocus();
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null) {
-                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    }
-                }
-                if (!hasFocus) {
-                    if (last_name_text.getText().toString().matches("")) {
-                        Snackbar.make(v, "Last Name field cannot be empty!", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        //set text color to #777c7c
-                        last_name_text.setTextColor(Color.parseColor("#777c7c"));
-                        //set text style to italic
-                        last_name_text.setTypeface(null, Typeface.ITALIC);
-                        last_name_text.setText("Last Name");
-                    }
-                }
-            }
-        });
-
         //Empty Text for Institute Edit Text
         //Check if user leave empty field
         institute_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (institute_text.getText().toString().matches("Institute/University")) {
+                if (hasFocus){
                     //set empty field
                     institute_text.setText("");
-                    //set first name text color to white
-                    institute_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set first name text color to black
+                    institute_text.setTextColor(Color.parseColor("#000000"));
                     //set first name text style to default
                     institute_text.setTypeface(Typeface.DEFAULT);
                     institute_text.requestFocus();
@@ -159,7 +154,7 @@ public class FirstTime extends AppCompatActivity {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (!hasFocus) {
+                else {
                     if (institute_text.getText().toString().matches("")) {
                         Snackbar.make(v, "Institute/University field cannot be empty!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -168,6 +163,10 @@ public class FirstTime extends AppCompatActivity {
                         //set text style to italic
                         institute_text.setTypeface(null, Typeface.ITALIC);
                         institute_text.setText("Institute/University");
+                        complete_check_institute = false;
+                    }
+                    else {
+                        complete_check_institute = true;
                     }
                 }
             }
@@ -176,14 +175,13 @@ public class FirstTime extends AppCompatActivity {
         //Empty Text for Preferred Specialization Edit Text
         //Check if user leave empty field
         specialization_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (specialization_text.getText().toString().matches("Preferred Specialization")) {
+                if (hasFocus){
                     //set empty field
                     specialization_text.setText("");
-                    //set first name text color to white
-                    specialization_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set first name text color to black
+                    specialization_text.setTextColor(Color.parseColor("#000000"));
                     //set first name text style to default
                     specialization_text.setTypeface(Typeface.DEFAULT);
                     specialization_text.requestFocus();
@@ -192,7 +190,7 @@ public class FirstTime extends AppCompatActivity {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (!hasFocus) {
+                else {
                     if (specialization_text.getText().toString().matches("")) {
                         Snackbar.make(v, "Institute/University field cannot be empty!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -201,6 +199,10 @@ public class FirstTime extends AppCompatActivity {
                         //set text style to italic
                         specialization_text.setTypeface(null, Typeface.ITALIC);
                         specialization_text.setText("Preferred Specialization");
+                        complete_check_specialization = false;
+                    }
+                    else {
+                        complete_check_specialization = true;
                     }
                 }
             }
@@ -209,14 +211,13 @@ public class FirstTime extends AppCompatActivity {
         //Empty Text for Preferred Specialization Edit Text
         //Check if user leave empty field
         location_text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (location_text.getText().toString().matches("Preferred Work Location")) {
+                if (hasFocus){
                     //set empty field
                     location_text.setText("");
-                    //set first name text color to white
-                    location_text.setTextColor(Color.parseColor("#ffffff"));
+                    //set first name text color to black
+                    location_text.setTextColor(Color.parseColor("#000000"));
                     //set first name text style to default
                     location_text.setTypeface(Typeface.DEFAULT);
                     location_text.requestFocus();
@@ -225,7 +226,7 @@ public class FirstTime extends AppCompatActivity {
                         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     }
                 }
-                if (!hasFocus) {
+                else {
                     if (location_text.getText().toString().matches("")) {
                         Snackbar.make(v, "Preferred Work Location field cannot be empty!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -233,7 +234,11 @@ public class FirstTime extends AppCompatActivity {
                         location_text.setTextColor(Color.parseColor("#777c7c"));
                         //set text style to italic
                         location_text.setTypeface(null, Typeface.ITALIC);
-                        location_text.setText("Preferred Work Location");
+                        location_text.setText("Preferred Work Location (Malaysia)");
+                        complete_check_location = false;
+                    }
+                    else {
+                        complete_check_location = true;
                     }
                 }
             }
@@ -242,8 +247,38 @@ public class FirstTime extends AppCompatActivity {
 
     //Continue to home page
     public void GoToHomeOnClick(View v){
-        Intent myIntent = new Intent(FirstTime.this, Home.class);
-        FirstTime.this.startActivity(myIntent);
+        proceed_button.setVisibility(View.GONE);
+        proceed_progress.setVisibility(View.VISIBLE);
+
+        String institute = institute_text.getText().toString();
+        String specialization = specialization_text.getText().toString();
+        String work_location = location_text.getText().toString();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            String uid = currentUser.getUid();
+            if (!complete_check_institute | !complete_check_specialization |!complete_check_location){
+                Toast.makeText(FirstTime.this, "Please complete the form.", Toast.LENGTH_SHORT).show();
+                proceed_button.setVisibility(View.VISIBLE);
+                proceed_progress.setVisibility(View.GONE);
+            }
+            else{
+                //set first time to no
+                mDatabase.child("User").child(uid).child("FirstTime").setValue("no");
+                //update institute
+                mDatabase.child("User").child(uid).child("Profile").child("Institute").setValue(institute);
+                //update specialization
+                mDatabase.child("User").child(uid).child("Profile").child("Preferred Specialization").setValue(specialization);
+                //update work location
+                mDatabase.child("User").child(uid).child("Profile").child("Preferred Work Location").setValue(work_location);
+                Intent myIntent = new Intent(FirstTime.this, Home.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                FirstTime.this.startActivity(myIntent);
+                finish();
+            }
+
+            //Toast.makeText(FirstTime.this, mDatabase.toString(),
+            //       Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Disable Device Back Button

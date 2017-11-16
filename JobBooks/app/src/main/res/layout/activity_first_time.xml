@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/fancyblackxhdpi"
+    android:background="#cfcfcf"
     android:focusableInTouchMode="true"
     android:touchscreenBlocksFocus="false"
     tools:context="com.jackong.jobbooks.FirstTime">
@@ -14,112 +13,95 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="visible">
+
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:text="@string/complete_profile_info"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/text_box_first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:allowUndo="false"
-            android:ems="10"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:selectAllOnFocus="false"
-            android:text="@string/default_text_first_name"
-            android:textColorHighlight="@android:color/background_light"
-            android:textColor="#777c7c"
-            android:textStyle="italic"/>
-
-        <EditText
-            android:id="@+id/text_box_last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
-            android:allowUndo="false"
-            android:ems="10"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:selectAllOnFocus="false"
-            android:text="@string/default_text_last_name"
-            android:textColorHighlight="@android:color/background_light"
-            android:textColor="#777c7c"
-            android:textStyle="italic"/>
-
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/text_box_institute"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:allowUndo="false"
-            android:ems="10"
-            android:inputType="text"
-            android:maxLines="1"
+            android:background="@drawable/curve_white"
+            android:dropDownHeight="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
             android:padding="15dp"
-            android:selectAllOnFocus="false"
+            android:singleLine="false"
             android:text="@string/default_text_institute"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
-        <EditText
+        <TextView
+            android:id="@+id/institute_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/institute_hint"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <AutoCompleteTextView
             android:id="@+id/text_box_preferred_specializations"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:allowUndo="false"
-            android:ems="10"
+            android:background="@drawable/curve_white"
             android:inputType="text"
-            android:maxLines="1"
             android:padding="15dp"
-            android:selectAllOnFocus="false"
             android:text="@string/default_text_preferred_specialization"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
-
-        <EditText
-            android:id="@+id/text_box_preferred_locations"
-            android:layout_width="match_parent"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+        <TextView
+            android:id="@+id/specialization_hint"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/specialization_hint"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <AutoCompleteTextView
+            android:id="@+id/text_box_work_location"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:allowUndo="false"
-            android:ems="10"
+            android:background="@drawable/curve_white"
             android:inputType="text"
-            android:maxLines="1"
             android:padding="15dp"
-            android:selectAllOnFocus="false"
             android:text="@string/default_text_preferred_location"
-            android:textColorHighlight="@android:color/background_light"
             android:textColor="#777c7c"
-            android:textStyle="italic"/>
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/location_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/location_hint"
+            android:textSize="12sp"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/btn_proceed_profile_setup"
@@ -128,11 +110,20 @@
             android:layout_marginLeft="65dp"
             android:layout_marginRight="65dp"
             android:layout_marginTop="20dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@drawable/curve_red_d50000"
+            android:onClick="GoToHomeOnClick"
             android:padding="5dp"
             android:text="@string/continue_button_text"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:onClick="GoToHomeOnClick"/>
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/first_time_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"/>
     </LinearLayout>
 </RelativeLayout>
