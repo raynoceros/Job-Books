@@ -1,10 +1,12 @@
 package com.jackong.jobbooks;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -60,6 +64,7 @@ public class Profile extends AppCompatActivity {
     private TextView address_profile;
     private TextView nationality_profile;
     private ListView language_listview;
+    private Button profile_info_edit_button;
     private ImageView profile_pic;
 
     public static final int GALLERY_PICK = 1;
@@ -71,26 +76,9 @@ public class Profile extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Intent myIntent;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-
-                    myIntent = new Intent(Profile.this, Home.class);
-                    Profile.this.startActivity(myIntent);
-                    overridePendingTransition(0,0);
-                    finishActivity(0);
-
-                    return true;
                 case R.id.navigation_search:
 
                     myIntent = new Intent(Profile.this, Search.class);
-                    Profile.this.startActivity(myIntent);
-                    overridePendingTransition(0,0);
-                    finishActivity(0);
-
-                    return true;
-
-                case R.id.navigation_notifications:
-
-                    myIntent = new Intent(Profile.this, Notification.class);
                     Profile.this.startActivity(myIntent);
                     overridePendingTransition(0,0);
                     finishActivity(0);
@@ -134,6 +122,8 @@ public class Profile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mImageStorage = FirebaseStorage.getInstance().getReference();
         language_listview = (ListView)findViewById(R.id.language_listview);
+        profile_info_edit_button = (Button)findViewById(R.id.profile_button);
+        name_profile = (TextView)findViewById(R.id.profile_name);
 
         //Set Upload Image Button for Profile Pic
         profile_pic.setOnClickListener(new View.OnClickListener(){
@@ -144,6 +134,45 @@ public class Profile extends AppCompatActivity {
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
+            }
+        });
+
+        //Set Edit Button
+        profile_info_edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
+                final EditText profile_name_edit = new EditText(Profile.this);
+                profile_name_edit.setHint(name_profile.getText().toString());
+                builder.setTitle("Change Name");
+                builder.setView(profile_name_edit);
+                builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (profile_name_edit.getText().toString().matches("")){
+                            Toast.makeText(getApplicationContext(), "Nothing changes.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (profile_name_edit.getText().toString().matches(profile_name_edit.getHint().toString())){
+                            Toast.makeText(getApplicationContext(), "Nothing changes.", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            String currentUser = mAuth.getUid();
+                            String tv_name = profile_name_edit.getText().toString();
+                            if (currentUser !=null) {
+                                mDatabase.child("User").child(currentUser).child("Profile").child("Name").setValue(tv_name);
+                                Toast.makeText(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+
             }
         });
 
@@ -182,7 +211,6 @@ public class Profile extends AppCompatActivity {
                 Profile.this.startActivity(myIntent);
             }
         });
-
 
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null){
@@ -300,7 +328,6 @@ public class Profile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
                     String profile_name = dataSnapshot.getValue().toString();
-                    name_profile = (TextView)findViewById(R.id.profile_name);
                     if (name_profile != null){
                         name_profile.setText(profile_name);
                     }
@@ -343,7 +370,9 @@ public class Profile extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null) {
                     String profile_image_link = dataSnapshot.getValue().toString();
                     if (profile_image_link != null){
-                        Picasso.with(Profile.this).load(profile_image_link).into(profile_pic);
+                        if (!profile_image_link.matches("-")) {
+                            Picasso.with(Profile.this).load(profile_image_link).into(profile_pic);
+                        }
                     }
                 }
             }

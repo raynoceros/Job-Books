@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Chat extends AppCompatActivity {
+public class CompanyChat extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -40,47 +40,42 @@ public class Chat extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Intent myIntent;
             switch (item.getItemId()) {
-                case R.id.navigation_search:
-
-                    myIntent = new Intent(Chat.this, Search.class);
-                    Chat.this.startActivity(myIntent);
-                    overridePendingTransition(0,0);
-                    finishActivity(0);
-
-                    return true;
-                case R.id.navigation_chat:
+                case R.id.navigation_company_chat:
                     //do nothing
-
                     return true;
-                case R.id.navigation_profile:
 
-                    myIntent = new Intent(Chat.this, Profile.class);
-                    Chat.this.startActivity(myIntent);
+                case R.id.navigation_company_post:
+
+                    myIntent = new Intent(CompanyChat.this, CompanyPost.class);
+                    CompanyChat.this.startActivity(myIntent);
                     overridePendingTransition(0,0);
                     finishActivity(0);
+                    return true;
 
+                case R.id.navigation_company_profile:
+                    myIntent = new Intent(CompanyChat.this, CompanyProfile.class);
+                    CompanyChat.this.startActivity(myIntent);
+                    overridePendingTransition(0,0);
+                    finishActivity(0);
                     return true;
             }
             return false;
         }
-
-
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_company_chat);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_company);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
-        navigation.setSelectedItemId(R.id.navigation_chat);
+        navigation.setSelectedItemId(R.id.navigation_company_chat);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        chat_listview = (ListView)findViewById(R.id.studentchat_listview);
+        chat_listview = (ListView)findViewById(R.id.companychat_listview);
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null){
@@ -132,19 +127,21 @@ public class Chat extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 ChatListModel chatListModel = chatListModels.get(position);
                 //Toast.makeText(getApplicationContext(), chatListModel.getUser_id(), Toast.LENGTH_LONG).show();
-                Intent myIntent = new Intent(Chat.this, ChatWindow.class);
+                Intent myIntent = new Intent(CompanyChat.this, ChatWindow.class);
                 myIntent.putExtra("target_user_id", chatListModel.getUser_id());
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                Chat.this.startActivity(myIntent);
+                CompanyChat.this.startActivity(myIntent);
                 overridePendingTransition(0, R.anim.fadein);
                 finish();
             }
         });
+
     }
 
     @Override
     public void onBackPressed() {
-        //do ntg
+
     }
+
 
 }

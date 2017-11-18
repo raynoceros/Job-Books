@@ -36,7 +36,6 @@ public class EditEducation extends AppCompatActivity {
     private Boolean complete_check_institute = false;
     private Boolean complete_check_qualification = false;
     private Boolean complete_check_field_of_study = false;
-    private ProgressDialog save_progressdialog;
     private FrameLayout touchInterceptor;
 
 
@@ -54,7 +53,6 @@ public class EditEducation extends AppCompatActivity {
         institute_text = (AutoCompleteTextView)findViewById(R.id.text_box_institute);
         qualification_text = (AutoCompleteTextView)findViewById(R.id.text_box_qualification);
         field_of_study_text = (AutoCompleteTextView)findViewById(R.id.text_box_field_of_study);
-        save_progressdialog = new ProgressDialog(this);
         touchInterceptor = (FrameLayout)findViewById(R.id.touchInterceptor);
 
         //set Auth
@@ -259,6 +257,8 @@ public class EditEducation extends AppCompatActivity {
     }
 
     public void EditEduOnClick(View v){
+        final ProgressDialog save_progressdialog;
+        save_progressdialog = new ProgressDialog(this);
         save_progressdialog.setTitle("Loading");
         save_progressdialog.setMessage("Updating your information");
         save_progressdialog.setCanceledOnTouchOutside(false);

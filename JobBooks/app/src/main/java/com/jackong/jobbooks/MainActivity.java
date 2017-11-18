@@ -37,33 +37,44 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser == null) {
             goToLogin();
         } else {
-            String uid = currentUser.getUid();
-            mDatabase.child("User").child(uid).child("FirstTime").addValueEventListener(new ValueEventListener() {
+            final String uid = currentUser.getUid();
+            mDatabase.child("User").child(uid).child("AccountType").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.getValue() != null) {
-                        String check_if_first_time = dataSnapshot.getValue().toString();
-                        if (check_if_first_time != null) {
-                            if (check_if_first_time.matches("yes")) {
-                                goToFirstTime();
-                            } else if (check_if_first_time.matches("no")){
-                                goToHome();
-                            }
-                            else{
-                                mAuth.signOut();
-                                finish();
-                            }
+                    if (dataSnapshot.getValue() != null){
+                        String account_type = dataSnapshot.getValue().toString();
+
+                        //check if is student
+                        if (account_type.matches("Student")){
+                            mDatabase.child("User").child(uid).child("FirstTime").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue() != null) {
+                                        String check_if_first_time = dataSnapshot.getValue().toString();
+                                        if (check_if_first_time != null) {
+                                            if (check_if_first_time.matches("yes")) {
+                                                //go to first time
+                                                goToFirstTime();
+                                            } else {
+                                                //go to student search
+                                                goToStudentSearch();
+                                            }
+                                        }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         }
-                        else {
-                            mAuth.signOut();
-                            finish();
+                        //check if is company
+                        else if (account_type.matches("Company")){
+                            gotocompanyjob();
                         }
-                    }
-                    else{
-                        mAuth.signOut();
-                        finish();
                     }
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
@@ -80,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goToHome(){
-        Intent startIntent = new Intent(MainActivity.this, Home.class);
+    private void goToStudentSearch(){
+        Intent startIntent = new Intent(MainActivity.this, Search.class);
         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(startIntent);
         overridePendingTransition(0, R.anim.fadein);
@@ -90,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToFirstTime(){
         Intent startIntent = new Intent(MainActivity.this, FirstTime.class);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(startIntent);
+        overridePendingTransition(0,0);
+        finish();
+    }
+
+    private void gotocompanyjob(){
+        Intent startIntent = new Intent(MainActivity.this, CompanyPost.class);
         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(startIntent);
         overridePendingTransition(0,0);

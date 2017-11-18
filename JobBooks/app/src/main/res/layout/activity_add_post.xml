@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jackong.jobbooks.AddPost"
+    android:background="#cfcfcf"
+    android:focusableInTouchMode="true"
+    android:touchscreenBlocksFocus="false"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/job_title_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/curve_white"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:selectAllOnFocus="false"
+                android:hint="Job Title"
+                android:textColor="#000000" />
+
+
+            <Spinner
+                android:id="@+id/specialization_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/job_slot_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/curve_white"
+                android:ems="10"
+                android:hint="Job Slot"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:selectAllOnFocus="false"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/job_description_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/curve_white"
+                android:ems="10"
+                android:hint="Job Description"
+                android:inputType="textMultiLine|textVisiblePassword"
+                android:padding="15dp"
+                android:selectAllOnFocus="false"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/job_salary_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/curve_white"
+                android:ems="10"
+                android:hint="Job Salary"
+                android:inputType="textVisiblePassword"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:selectAllOnFocus="false"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btn_add_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="65dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/curve_red_d50000"
+                android:padding="5dp"
+                android:text="@string/edit_langugage_add_button"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:onClick="AddPostClick"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

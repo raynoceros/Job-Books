@@ -246,7 +246,7 @@ public class FirstTime extends AppCompatActivity {
     }
 
     //Continue to home page
-    public void GoToHomeOnClick(View v){
+    public void goToSearchOnClick(View v){
         proceed_button.setVisibility(View.GONE);
         proceed_progress.setVisibility(View.VISIBLE);
 
@@ -270,7 +270,7 @@ public class FirstTime extends AppCompatActivity {
                 mDatabase.child("User").child(uid).child("Profile").child("Preferred Specialization").setValue(specialization);
                 //update work location
                 mDatabase.child("User").child(uid).child("Profile").child("Preferred Work Location").setValue(work_location);
-                Intent myIntent = new Intent(FirstTime.this, Home.class);
+                Intent myIntent = new Intent(FirstTime.this, Search.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 FirstTime.this.startActivity(myIntent);
                 finish();

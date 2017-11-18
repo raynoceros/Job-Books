@@ -142,7 +142,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 } catch(FirebaseNetworkException e) {
                                     error_message = "Network disconnected...Unable to connect.";
                                 } catch(Exception e) {
-                                    error_message = "Reset email send fail. Please try again later";
+                                    error_message = "The email you entered is not found.";
                                 }
                                 Toast.makeText(ForgotPassword.this, error_message, Toast.LENGTH_LONG).show();
                                 reset_progress.setVisibility(View.INVISIBLE);

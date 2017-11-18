@@ -45,7 +45,7 @@
     <string name="edit_edu_qualification_hint">Current Qualification</string>
     <string name="edit_edu_field_of_study_hint">Field of Study</string>
 
-    <string name="edit_language_info">Tap on the langauge you wish to edit/delete.</string>
+    <string name="edit_language_info">Tap on the langauge you wish to delete.</string>
     <string name="edit_langugage_add_button">ADD NEW</string>
 
 
@@ -60,5 +60,12 @@
     <string name="about_me_nationality">Nationality</string>
     <string name="edit_address_hint">Address</string>
     <string name="edit_nationality_hint">Nationality</string>
+
+    <!--Company Profile-->
+    <string name="company_profile">Company Profile</string>
+    <!--Company Post-->
+    <string name="company_post">Company Post</string>
+    <!--Company Chat-->
+    <string name="company_chat">Company Chat</string>
 
 </resources>

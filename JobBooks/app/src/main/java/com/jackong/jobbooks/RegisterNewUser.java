@@ -328,33 +328,35 @@ public class RegisterNewUser extends AppCompatActivity {
 
 
                     //once register success, create the default database for user
+                    //set user account type to Student
+                    mDatabase.child("User").child(uid).child("AccountType").setValue("Student");
                     //set first time boolean to database
                     mDatabase.child("User").child(uid).child("FirstTime").setValue("yes");
-                    //set user email
-                    mDatabase.child("User").child(uid).child("Profile").child("Email").setValue(email_address);
-                    //set user name to database
-                    mDatabase.child("User").child(uid).child("Profile").child("Name").setValue(name);
-                    //set user create account time to database
-                    mDatabase.child("User").child(uid).child("Profile").child("DateCreated").setValue(time_register);
-                    //set user institute
-                    mDatabase.child("User").child(uid).child("Profile").child("Institute").setValue("-");
-                    //set user qualification
-                    mDatabase.child("User").child(uid).child("Profile").child("Qualification").setValue("-");
+
+                    //set user address
+                    mDatabase.child("User").child(uid).child("Profile").child("Address").setValue("-");
                     //set user course
                     mDatabase.child("User").child(uid).child("Profile").child("Course").setValue("-");
+                    //set user create account time to database
+                    mDatabase.child("User").child(uid).child("Profile").child("DateCreated").setValue(time_register);
+                    //set user email
+                    mDatabase.child("User").child(uid).child("Profile").child("Email").setValue(email_address);
                     //set user expected salary
                     mDatabase.child("User").child(uid).child("Profile").child("Expected Salary").setValue("-");
+                    //set user image
+                    mDatabase.child("User").child(uid).child("Profile").child("Image").setValue("-");
+                    //set user institute
+                    mDatabase.child("User").child(uid).child("Profile").child("Institute").setValue("-");
+                    //set user name to database
+                    mDatabase.child("User").child(uid).child("Profile").child("Name").setValue(name);
+                    //set user nationality
+                    mDatabase.child("User").child(uid).child("Profile").child("Nationality").setValue("-");
                     //set user preferred specialization
                     mDatabase.child("User").child(uid).child("Profile").child("Preferred Specialization").setValue("-");
                     //set user preferred work location
                     mDatabase.child("User").child(uid).child("Profile").child("Preferred Work Location").setValue("-");
-                    //set user address
-                    mDatabase.child("User").child(uid).child("Profile").child("Address").setValue("-");
-                    //set user nationality
-                    mDatabase.child("User").child(uid).child("Profile").child("Nationality").setValue("-");
-                    //set user language
-                    mDatabase.child("User").child(uid).child("Profile").child("Langauge").child("blank").setValue("-");
-
+                    //set user qualification
+                    mDatabase.child("User").child(uid).child("Profile").child("Qualification").setValue("-");
 
                     Toast.makeText(RegisterNewUser.this, "Register success.",
                             Toast.LENGTH_SHORT).show();

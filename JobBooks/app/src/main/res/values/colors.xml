@@ -9,4 +9,5 @@
     <color name="accent_material_dark">#d50000</color>
     <color name="background_material_dark">#cfcfcf</color>
     <color name="transparentGray">#87707070</color>
+    <color name="half_transparent">#7effffff</color>
 </resources>

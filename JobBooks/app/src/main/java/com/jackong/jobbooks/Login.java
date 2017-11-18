@@ -217,21 +217,39 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Authentication success.", Toast.LENGTH_SHORT).show();
                     FirebaseUser currentUser = mAuth.getCurrentUser();
                     if (currentUser != null) {
-                        String uid = currentUser.getUid();
-                        mDatabase.child("User").child(uid).child("FirstTime").addValueEventListener(new ValueEventListener() {
+                        final String uid = currentUser.getUid();
+                        mDatabase.child("User").child(uid).child("AccountType").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.getValue() != null) {
-                                    String check_if_first_time = dataSnapshot.getValue().toString();
-                                    if (check_if_first_time != null) {
-                                        if (check_if_first_time.matches("yes")) {
-                                            goToFirstTime();
-                                        } else {
-                                            goToHome();
-                                        }
+                                if (dataSnapshot.getValue() != null){
+                                    String account_type = dataSnapshot.getValue().toString();
+                                    if (account_type.matches("Student")){
+                                        mDatabase.child("User").child(uid).child("FirstTime").addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.getValue() != null) {
+                                                    String check_if_first_time = dataSnapshot.getValue().toString();
+                                                    if (check_if_first_time != null) {
+                                                        if (check_if_first_time.matches("yes")) {
+                                                            goToFirstTime();
+                                                        } else {
+                                                            goToSearch();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                    else if (account_type.matches("Company")){
+                                        goToCompanyJob();
                                     }
                                 }
                             }
+
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
@@ -265,12 +283,21 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    private void goToHome(){
+    private void goToSearch(){
         login_progressdialog.dismiss();
-        Intent myIntent = new Intent(Login.this, Home.class);
+        Intent myIntent = new Intent(Login.this, Search.class);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Login.this.startActivity(myIntent);
         overridePendingTransition(0,R.anim.fadein);
+        finish();
+    }
+
+    private void goToCompanyJob(){
+        login_progressdialog.dismiss();
+        Intent myIntent = new Intent(Login.this, CompanyPost.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Login.this.startActivity(myIntent);
+        overridePendingTransition(0, R.anim.fadein);
         finish();
     }
 }

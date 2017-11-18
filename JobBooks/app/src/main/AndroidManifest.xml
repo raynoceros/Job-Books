@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jackong.jobbooks">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,18 +27,17 @@
             android:name=".FirstTime"
             android:label="Profile"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Home"/>
         <activity
             android:name=".Search"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".Notification"
+            android:label="Search Jobs"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Chat"
+            android:label="Message Box"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Profile"
+            android:label="Profile"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".EditEducation"
@@ -66,8 +65,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity
+            android:name=".CompanyProfile"
+            android:label="Profile" />
+        <activity
+            android:name=".CompanyChat"
+            android:label="Message Box" />
+        <activity
+            android:name=".CompanyPost"
+            android:label="Job Post" />
+        <activity
+            android:name=".ChatWindow"
+            android:label="Chat Room" />
+        <activity
+            android:name=".EditCompanyInfo"
+            android:label="Company Info" />
+        <activity
+            android:name=".ViewJobCompany"
+            android:label="Job Details" />
+        <activity
+            android:name=".AddPost"
+            android:label="Add New Post" />
+        <activity
+            android:name=".ViewJob"
+            android:label="Job Details" />
     </application>
 
 </manifest>
